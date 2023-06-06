@@ -1,0 +1,11 @@
+﻿  SSArduino.cpp
+D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\SSArduino.h(30,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\SSArduino.h(37,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+  main.cpp
+D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\SSArduino.h(30,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\SSArduino.h(37,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\main.cpp(18,30): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\main.cpp(43,22): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
+D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\main.cpp(54,22): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
+  Génération de code en cours...
+  ArduinoCom.vcxproj -> D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\x64\Debug\ArduinoCom.exe

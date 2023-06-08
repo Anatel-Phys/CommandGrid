@@ -2,17 +2,13 @@
 #include <Windows.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <iostream>
 #include <string>
 #include <string.h>
 #include <chrono>
 #include <thread>
 #include <time.h>
 #include <fstream>
-#include <vector>
-#include "DynamicTimeWarping.h"
-#include "Interpolation.h"
-#include <SFML/Graphics.hpp>
+#include <iostream>
 
 class GridReader
 {
@@ -43,31 +39,6 @@ public:
 	bool connected_;
 	bool obstructed(size_t idx);
 	void calibrate(size_t n_iter);
+
 };
 
-//CONVENTION : THE X SENSOR DATA COMES FIRST
-class Controller
-{
-private:
-	GridReader* p_sensorsController;
-
-	std::vector<Sketch> dataset;
-	std::vector<void(*)()> commands;
-	sf::Clock patternTimer;
-	sf::Clock patternResetTimer;
-	float timeBeforeReset;
-
-	//helpers
-	void fill_sensor_vals();
-	bool gen_point_from_sensors();
-	bool currentlyReadingPattern;
-
-	std::vector<TimePoint> xData;
-	std::vector<TimePoint> yData;
-	void save_new_pattern(size_t class_idx);
-
-public:
-
-	Controller();
-	void run(); //not to be included in my typical "while (engine.is_running()) run()"
-};

@@ -1,12 +1,11 @@
 #include "GridReader.h"
 
-
 GridReader::GridReader(size_t width, size_t height, char* com_port, DWORD COM_BAUD_RATE)
 {
 	connected_ = false;
 	front_delimiter_ = '[';
 	end_delimiter_ = ']';
-	
+
 
 	grid_width = width;
 	grid_height = height;
@@ -78,7 +77,7 @@ bool GridReader::ReadSensorData(int reply_wait_time)
 
 				if (inc_msg[0] == front_delimiter_ || began) {
 					began = true;
-					
+
 
 					if (inc_msg[0] == end_delimiter_)
 					{
@@ -104,7 +103,7 @@ bool GridReader::ReadSensorData(int reply_wait_time)
 void GridReader::fill_sensor_vals()
 {
 	int idx;
-	
+
 	for (std::vector<char> sens : inc_bytes)
 	{
 		idx = 0;
@@ -118,7 +117,7 @@ void GridReader::fill_sensor_vals()
 			idx++;
 
 		char* sens_idx = new char[idx + 1];
-		
+
 		for (size_t i = 0; i < idx; i++)
 			sens_idx[i] = sens.at(i);
 		sens_idx[idx] = '\0';
@@ -140,7 +139,7 @@ void GridReader::fill_sensor_vals()
 		int sens_data_num = std::stoi(sens_data);
 
 		sensors_val.at(sens_idx_num) = sens_data_num;
-		
+
 		delete[] sens_idx;
 		delete[] sens_data;
 
@@ -168,7 +167,7 @@ GridReader::~GridReader()
 
 bool GridReader::obstructed(size_t idx)
 {
-	return sensors_val.at(idx) > (1 + 2 + tolerance) * mean_sensor_vals.at(idx);
+	return sensors_val.at(idx) > (2 + tolerance) * mean_sensor_vals.at(idx);
 }
 
 void GridReader::calibrate(size_t n_iter)
@@ -197,87 +196,5 @@ void GridReader::calibrate(size_t n_iter)
 	for (size_t i = 0; i < mean_sensor_vals.size(); i++)
 	{
 		mean_sensor_vals.at(i) = static_cast<int>(static_cast<float>(mean_sensor_vals.at(i)) / n_iter);
-	}
-}
-
-void Controller::fill_sensor_vals()
-{
-	p_sensorsController->fill_sensor_vals();
-}
-
-bool Controller::gen_point_from_sensors()
-{
-	bool some_sensor_is_obstructed = false;
-
-	int n_obstr = 0;
-	float mean_pos = 0.f;
-
-	for (int i = 0; i < p_sensorsController->grid_width; i++)
-	{
-		if (p_sensorsController->obstructed(i))
-		{
-			mean_pos += i;
-			n_obstr++;
-		}
-	}
-
-	if (n_obstr > 0)
-	{
-		mean_pos /= n_obstr;
-		xData.push_back(TimePoint(mean_pos, patternTimer.getElapsedTime().asSeconds()));
-		some_sensor_is_obstructed = true;
-	}
-
-	n_obstr = 0;
-	mean_pos = 0.f;
-	for (int j = 0; j < p_sensorsController->grid_height; j++)
-	{
-		if (p_sensorsController->obstructed(p_sensorsController->grid_width + j))
-		{
-			mean_pos += j;
-			n_obstr++;
-		}
-	}
-
-	if (n_obstr > 0)
-	{
-		mean_pos /= n_obstr;
-		yData.push_back(TimePoint(mean_pos, patternTimer.getElapsedTime().asSeconds()));
-		some_sensor_is_obstructed = true;
-	}
-
-	return some_sensor_is_obstructed;
-}
-
-void Controller::run()
-{
-	while (true)
-	{
-		fill_sensor_vals();
-		
-		if (gen_point_from_sensors())
-		{
-			if (!currentlyReadingPattern)
-			{
-				currentlyReadingPattern = true;
-				patternResetTimer.restart();
-				patternTimer.restart();
-			}
-			else
-			{
-				patternResetTimer.restart();
-			}
-		}
-		else
-		{
-			if (currentlyReadingPattern)
-			{
-				if (patternResetTimer.getElapsedTime().asSeconds() > timeBeforeReset)
-				{
-					currentlyReadingPattern = false;
-					save_new_pattern(0);
-				}
-			}
-		}
 	}
 }

@@ -1,84 +1,96 @@
-#include <SFML/Graphics.hpp>
-#include "SSArduino.h"
-#include <Windows.h>
-#include "GridReader.h"
+#include "Controller.h"
 
 
-char com_port[] = "\\\\.\\COM7";
+char com_port[] = "\\\\.\\COM5";
+
 
 int main()
 {
-	GridReader board(2, 2, com_port, CBR_115200);
-	sf::RenderWindow window(sf::VideoMode(1000, 1000), "CommandGrid");
-	sf::VertexArray arr(sf::Lines, 8);
-	sf::Event ev;
+	Controller ctr(2, 2, com_port, com_port, CBR_115200);
 
-	for (size_t i = 0; i < 8; i++)
-		arr[i].color = sf::Color::Green;
-	arr[0].position = { 50, 350 };
-	arr[1].position = { 950, 350 };
-	arr[2].position = { 50, 650 };
-	arr[3].position = { 950, 650 };
-	arr[4].position = { 350, 50 };
-	arr[5].position = { 350, 950 };
-	arr[6].position = { 650, 50 };
-	arr[7].position = { 650, 950 };
-
-
-
-	if (!board.connected_)
+	while (true)
 	{
-		printf("No connection on port %s, aborting..", com_port);
-		return -1;
+		ctr.run();
 	}
+
+
 	
-	std::cout << "Awake\n";
-
-	board.calibrate(30);
-
-
-	while (window.isOpen())
-	{
-		while (window.pollEvent(ev))
-		{
-			switch (ev.type)
-			{
-			default:
-				break;
-			case sf::Event::Closed:
-				window.close();
-				break;
-			}
-		}
-
-		PurgeComm(board.io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
-		Sleep(20);
-		if (!board.ReadSensorData(1))
-			std::cout << "Couldn't read sensor data\n";
-		board.fill_sensor_vals();
-
-
-		for (int i = 0; i < 4; i++)
-		{
-			if (board.obstructed(i))
-			{
-				arr[2*i].color = sf::Color::Red;
-				arr[2*i + 1].color = sf::Color::Red;
-			}
-			else
-			{
-				arr[2 * i].color = sf::Color::Green;
-				arr[2 * i + 1].color = sf::Color::Green;
-			}
-		}
-
-		window.clear();
-		window.draw(arr);
-		window.display();
-	}
-
-	return 0;
 }
+
+//vizualisation for 2x2 grid and physical command grid
+//int main()
+//{
+//	GridReader board(2, 2, com_port, CBR_115200);
+//	sf::RenderWindow window(sf::VideoMode(1000, 1000), "CommandGrid");
+//	sf::VertexArray arr(sf::Lines, 8);
+//	sf::Event ev;
+//
+//	for (size_t i = 0; i < 8; i++)
+//		arr[i].color = sf::Color::Green;
+//	arr[0].position = { 50, 350 };
+//	arr[1].position = { 950, 350 };
+//	arr[2].position = { 50, 650 };
+//	arr[3].position = { 950, 650 };
+//	arr[4].position = { 350, 50 };
+//	arr[5].position = { 350, 950 };
+//	arr[6].position = { 650, 50 };
+//	arr[7].position = { 650, 950 };
+//
+//
+//
+//	if (!board.connected_)
+//	{
+//		printf("No connection on port %s, aborting..", com_port);
+//		return -1;
+//	}
+//	
+//	std::cout << "Awake\n";
+//
+//	board.calibrate(30);
+//
+//
+//	while (window.isOpen())
+//	{
+//		while (window.pollEvent(ev))
+//		{
+//			switch (ev.type)
+//			{
+//			default:
+//				break;
+//			case sf::Event::Closed:
+//				window.close();
+//				break;
+//			}
+//		}
+//
+//		PurgeComm(board.io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
+//		Sleep(20);
+//		if (!board.ReadSensorData(1))
+//			std::cout << "Couldn't read sensor data\n";
+//		board.fill_sensor_vals();
+//
+//
+//		for (int i = 0; i < 4; i++)
+//		{
+//			if (board.obstructed(i))
+//			{
+//				arr[2*i].color = sf::Color::Red;
+//				arr[2*i + 1].color = sf::Color::Red;
+//			}
+//			else
+//			{
+//				arr[2 * i].color = sf::Color::Green;
+//				arr[2 * i + 1].color = sf::Color::Green;
+//			}
+//		}
+//
+//		window.clear();
+//		window.draw(arr);
+//		window.display();
+//	}
+//
+//	return 0;
+//}
 
 //int main()
 //{	

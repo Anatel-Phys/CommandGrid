@@ -1,12 +1,13 @@
 #include "Controller.h"
 
 
-char com_port[] = "\\\\.\\COM5";
-
+char com_port_sens[] = "\\\\.\\COM4";
+char com_port_ctr[] = "\\\\.\\COM5";
 
 int main()
 {
-	Controller ctr(2, 2, com_port, com_port, CBR_115200);
+	Controller ctr(2, 2, com_port_sens, com_port_ctr, CBR_115200);
+	std::cout << "Awake\n";
 
 	while (true)
 	{

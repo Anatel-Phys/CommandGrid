@@ -7,6 +7,8 @@ void Controller::fill_sensor_vals()
 
 bool Controller::gen_point_from_sensors()
 {
+	//for (float val : p_sensorsController->)
+
 	bool some_sensor_is_obstructed = false;
 
 	int n_obstr = 0;
@@ -28,7 +30,7 @@ bool Controller::gen_point_from_sensors()
 		xData.push_back(TimePoint(mean_pos, patternTimer.getElapsedTime().asSeconds()));
 		some_sensor_is_obstructed = true;
 	}
-
+	
 	n_obstr = 0;
 	mean_pos = 0.f;
 	for (int j = 0; j < p_sensorsController->grid_height; j++)
@@ -85,7 +87,7 @@ void Controller::update_record_command(size_t idx)
 {
 	PurgeComm(p_sensorsController->io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
 	Sleep(20);
-	if (!p_sensorsController->ReadSensorData(1))
+	if (!p_sensorsController->readSensorData(1))
 	{
 		std::cout << "Couldn't read sensor data\n";
 	}
@@ -130,6 +132,7 @@ Command Controller::get_command()
 
 void Controller::clear_patterns_from_class(size_t classIdx)
 {
+	std::cout << "Clearing data from class " << classIdx << std::endl;
 	std::vector<Pattern*> new_dataset;
 
 	for (Pattern* p : dataset)
@@ -149,12 +152,25 @@ void Controller::clear_patterns_from_class(size_t classIdx)
 
 void Controller::calibrate(size_t n_iter)
 {
+	PurgeComm(p_sensorsController->io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
 	p_sensorsController->calibrate(n_iter);
 }
 
 void Controller::switch_mode(Mode mode)
 {
 	curMode = mode;
+}
+
+void Controller::led_green()
+{
+	std::cout << "trying to light green led\n";
+	p_commandReader->send_cmd_str(CMD_GREEN_LED);
+}
+
+void Controller::led_red()
+{
+	std::cout << "trying to light red led\n";
+	p_commandReader->send_cmd_str(CMD_RED_LED);
 }
 
 Pattern* Controller::stupid_interpolation(std::vector<TimePoint>& x, std::vector<TimePoint>& y)
@@ -360,17 +376,21 @@ Pattern* Controller::process_new_pattern()
 
 Controller::Controller(size_t width, size_t height, char* com_port_grid, char* com_port_command, DWORD COM_BAUD_RATE)
 {
-	//p_sensorsController = new GridReader(width, height, com_port_grid, COM_BAUD_RATE);
+	p_sensorsController = new GridReader(width, height, com_port_grid, COM_BAUD_RATE);
 	p_commandReader = new CommandReader(com_port_command, COM_BAUD_RATE);
 	currentlyReadingPattern = false;
 	timeBeforeReset = 1.f;
 	difference_sensibility = 0.05f;
+	number_of_neighbours_computed = 5;
+
+	commands.push_back(&Controller::led_green);
+	commands.push_back(&Controller::led_red);
 
 	//for (int i = 0; i < p_sensorsController->mean_sensor_vals.size(); i++)
 	//{
 	//	p_sensorsController->mean_sensor_vals.at(i) = 10;
 	//}
-
+	calibrate(30);
 	patternResetTimer.restart();
 	patternTimer.restart();
 }
@@ -384,56 +404,69 @@ void Controller::run()
 		switch (command)
 		{
 		case Command::Listen:
-			std::cout << "Listening\n";
+			//std::cout << "Listening\n";
 			if (curMode != Mode::Listening)
 				clear_current_data();
 			curMode = Mode::Listening;
 			break;
 		case Command::Calibrate:
-			//calibrate(30);
-			std::cout << "calibrating\n";
+			calibrate(10);
+			//std::cout << "Calibrating\n";
 			p_commandReader->send_cmd_str(CMD_RESET);
 			break;
-		case Command::EmptyCommand1:
-			std::cout << "Empty1\n";
+		case Command::EmptyCommands:
+			//std::cout << "Empty\n";
 			clear_patterns_from_class(1);
-			p_commandReader->send_cmd_str(CMD_RESET);
-			break;
-		case Command::EmtpyCommand2:
-			std::cout << "Empty2\n";
 			clear_patterns_from_class(2);
 			p_commandReader->send_cmd_str(CMD_RESET);
 			break;
+		case Command::Idle:
+			//std::cout << "Idle\n";
+			break;
+		case Command::RecordCommand0:
+			//std::cout << "Record1\n";
+			if (curMode != Mode::RecordingCommand0)
+				clear_current_data();
+			curMode = Mode::RecordingCommand0;
+			break;
 		case Command::RecordCommand1:
-			std::cout << "Record1\n";
+			//std::cout << "Record2\n";
 			if (curMode != Mode::RecordingCommand1)
 				clear_current_data();
 			curMode = Mode::RecordingCommand1;
 			break;
-		case Command::RecordCommand2:
-			std::cout << "Record2\n";
-			if (curMode != Mode::RecordingCommand2)
-				clear_current_data();
-			curMode = Mode::RecordingCommand2;
-			break;
 		case Command::ErrorCommand:
-			std::cout << "Unable to understand command, skipping\n";
+			//std::cout << "Unable to understand command, skipping\n";
 			p_commandReader->send_cmd_str(CMD_RESET);
 			break;
 		default:
 			break;
 		}
+		
+		PurgeComm(p_sensorsController->io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
+		PurgeComm(p_commandReader->io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
+		Sleep(5);
+		if (!p_sensorsController->readSensorData(1))
+			std::cout << "Couldn't read sensor data\n";
+
+		fill_sensor_vals();
+
+	/*	for (int val : p_sensorsController->sensors_val)
+			std::cout << val << "\t";
+		std::cout << std::endl;*/
 
 		if (gen_point_from_sensors())
 		{
 			if (!currentlyReadingPattern)
 			{
+				std::cout << "Started reading pattern\n";
 				currentlyReadingPattern = true;
 				patternResetTimer.restart();
 				patternTimer.restart();
 			}
 			else
 			{
+				std::cout << "reset reading pattern\n";
 				patternResetTimer.restart();
 			}
 		}
@@ -443,6 +476,7 @@ void Controller::run()
 			{
 				if (patternResetTimer.getElapsedTime().asSeconds() > timeBeforeReset)
 				{
+					std::cout << "Processing pattern\n";
 					currentlyReadingPattern = false;
 					Pattern* p = process_new_pattern();
 
@@ -450,16 +484,26 @@ void Controller::run()
 					switch (curMode)
 					{
 					case Mode::Listening:
-						k = knn_class(p, dataset, number_of_neighbours_computed);
-						(this->*commands.at(k))();
-						delete p;
+						std::cout << "Trying to classify\n";
+						if (dataset.size() < number_of_neighbours_computed)
+						{
+							std::cout << "Too few patterns in dataset, passing pattern\n";
+							delete p;
+						}
+						else
+						{
+							k = knn_class(p, dataset, number_of_neighbours_computed);
+							std::cout << "class " << k << " identified\n";
+							(this->*commands.at(k))();
+							delete p;
+						}
+						break;
+					case Mode::RecordingCommand0:
+						p->classIdx = 0;
+						dataset.push_back(p);
 						break;
 					case Mode::RecordingCommand1:
 						p->classIdx = 1;
-						dataset.push_back(p);
-						break;
-					case Mode::RecordingCommand2:
-						p->classIdx = 2;
 						dataset.push_back(p);
 						break;
 					case Mode::ErrorMode:

@@ -12,15 +12,17 @@
 
 #define CMD_RESET "@rs$!"
 #define CMD_COMMAND "@cm$!"
+#define CMD_GREEN_LED "@gl$!"
+#define CMD_RED_LED "@rl$!"
 
 enum class Command
 {
 	Listen,
 	Calibrate,
-	EmptyCommand1,
-	EmtpyCommand2,
+	EmptyCommands,
+	RecordCommand0,
 	RecordCommand1,
-	RecordCommand2,
+	Idle,
 	ErrorCommand
 };
 
@@ -41,9 +43,7 @@ public:
 	CommandReader(char* com_port, DWORD COM_BAUD_RATE);
 
 	Command read_command(int reply_wait_time);
-	bool send_cmd_str(std::string cmd);
-	void light_red();
-	void light_green();
+	bool send_cmd_str(std::string cmd);;
 	void buzz();
 	Command query_command();
 	bool CloseSerialPort();

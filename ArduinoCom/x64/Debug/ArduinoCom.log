@@ -1,11 +1,39 @@
-﻿  SSArduino.cpp
-D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\SSArduino.h(30,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\SSArduino.h(37,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+﻿  DataModule.cpp
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\DataModule.cpp(33,17): warning C4244: 'return' : conversion de 'double' en 'float', perte possible de données
+  DynamicTimeWarping.cpp
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\DynamicTimeWarping.cpp(49,10): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\DynamicTimeWarping.cpp(54,19): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\DynamicTimeWarping.cpp(68,16): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
+  GridReader.cpp
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Interpolation.h(58,9): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+D:\Libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl(29,1): error C2760: erreur de syntaxe : jeton inattendu '(', attendu 'id-expression'
+D:\Libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl(41,1): error C2760: erreur de syntaxe : jeton inattendu '(', attendu 'id-expression'
+D:\Libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl(53,1): error C2760: erreur de syntaxe : jeton inattendu '(', attendu 'id-expression'
+D:\Libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl(66,1): error C2760: erreur de syntaxe : jeton inattendu '(', attendu 'id-expression'
+D:\Libraries\SFML-2.5.1\include\SFML\Graphics\Rect.hpp(93,5): message : Le diagnostic s'est produit dans la fonction 'sf::Rect<T>::Rect(const sf::Rect<U> &)' générée par le compilateur
+D:\Libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl(81,19): error C2589: '(' : jeton non conforme à droite de '::'
+D:\Libraries\SFML-2.5.1\include\SFML\Graphics\Rect.inl(114,21): error C2589: '(' : jeton non conforme à droite de '::'
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\GridReader.h(33,18): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\GridReader.cpp(68,27): warning C4244: 'initialisation' : conversion de 'time_t' en 'unsigned long', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\GridReader.cpp(227,29): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\GridReader.cpp(245,29): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+  Interpolation.cpp
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Interpolation.h(58,9): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Interpolation.cpp(52,19): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Interpolation.cpp(56,23): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Interpolation.cpp(111,43): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Interpolation.cpp(121,42): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
   main.cpp
-D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\SSArduino.h(30,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\SSArduino.h(37,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\main.cpp(18,30): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
-D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\main.cpp(43,22): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
-D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\ArduinoCom\main.cpp(54,22): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\SSArduino.h(30,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\SSArduino.h(37,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Interpolation.h(58,9): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\GridReader.h(33,18): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+  SimpleSerial.cpp
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\SimpleSerial.cpp(103,27): warning C4244: 'initialisation' : conversion de 'time_t' en 'unsigned long', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\SimpleSerial.cpp(139,27): warning C4244: 'initialisation' : conversion de 'time_t' en 'unsigned long', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\SimpleSerial.cpp(170,51): warning C4267: 'initialisation' : conversion de 'size_t' en 'unsigned int', perte possible de données
+  SSArduino.cpp
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\SSArduino.h(30,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\SSArduino.h(37,25): warning C4305: 'initialisation' : troncation de 'double' à 'float'
   Génération de code en cours...
-  ArduinoCom.vcxproj -> D:\Créations Persos\Progra\C++\Visual Studio\ArduinoCom\x64\Debug\ArduinoCom.exe
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\DataModule.cpp(152): warning C4715: 'load_sketches' : les chemins de contrôle ne retournent pas tous une valeur

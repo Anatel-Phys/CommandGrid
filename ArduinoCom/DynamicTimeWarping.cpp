@@ -56,6 +56,7 @@ size_t knn_class(Pattern* query, std::vector<Pattern*>& dataset, size_t k)
 	}
 
 	std::vector<Pattern*> items = bpq.get_items();
+
 	int classes[CLASS_MAX];
 	for (size_t i = 0; i < bpq.get_size(); i++)
 	{

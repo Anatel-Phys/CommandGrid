@@ -32,9 +32,9 @@ public:
 public:
 	GridReader(size_t width, size_t height, char* com_port, DWORD COM_BAUD_RATE);
 
-	bool ReadSensorData(int reply_wait_time);
+	bool readSensorData(int reply_wait_time);
 	void fill_sensor_vals();
-	bool CloseSerialPort();
+	bool closeSerialPort();
 	~GridReader();
 	bool connected_;
 	bool obstructed(size_t idx);

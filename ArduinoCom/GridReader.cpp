@@ -54,7 +54,7 @@ GridReader::GridReader(size_t width, size_t height, char* com_port, DWORD COM_BA
 	Sleep(2000);
 }
 
-bool GridReader::ReadSensorData(int reply_wait_time)
+bool GridReader::readSensorData(int reply_wait_time)
 {
 	DWORD buf_bytes;
 	inc_bytes.clear();
@@ -137,7 +137,7 @@ void GridReader::fill_sensor_vals()
 
 		int sens_idx_num = std::stoi(sens_idx);
 		int sens_data_num = std::stoi(sens_data);
-
+		
 		sensors_val.at(sens_idx_num) = sens_data_num;
 
 		delete[] sens_idx;
@@ -146,7 +146,7 @@ void GridReader::fill_sensor_vals()
 	}
 }
 
-bool GridReader::CloseSerialPort()
+bool GridReader::closeSerialPort()
 {
 	if (connected_) {
 		connected_ = false;
@@ -167,7 +167,7 @@ GridReader::~GridReader()
 
 bool GridReader::obstructed(size_t idx)
 {
-	return sensors_val.at(idx) > (2 + tolerance) * mean_sensor_vals.at(idx);
+	return sensors_val.at(idx) > (1.2 + tolerance) * mean_sensor_vals.at(idx);
 }
 
 void GridReader::calibrate(size_t n_iter)
@@ -180,9 +180,9 @@ void GridReader::calibrate(size_t n_iter)
 	for (size_t n = 0; n < n_iter; n++)
 	{
 		PurgeComm(io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
-		Sleep(20);
+		Sleep(5);
 
-		if (!ReadSensorData(1))
+		if (!readSensorData(1))
 			std::cout << "Couldn't read sensor data\n";
 
 		fill_sensor_vals();
@@ -196,5 +196,6 @@ void GridReader::calibrate(size_t n_iter)
 	for (size_t i = 0; i < mean_sensor_vals.size(); i++)
 	{
 		mean_sensor_vals.at(i) = static_cast<int>(static_cast<float>(mean_sensor_vals.at(i)) / n_iter);
+		std::cout << mean_sensor_vals.at(i) << std::endl;
 	}
 }

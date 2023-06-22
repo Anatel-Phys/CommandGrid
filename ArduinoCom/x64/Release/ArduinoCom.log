@@ -2,23 +2,23 @@
 D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\GridReader.h(29,18): warning C4305: 'initialisation' : troncation de 'double' à 'float'
 D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(30,29): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
 D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(49,29): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(184,64): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(187,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(190,65): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(193,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(221,64): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(224,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(227,65): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(230,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(217,8): warning C4101: 'buf' : variable locale non référencée
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(305,64): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(308,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(311,65): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(314,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
-D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(295,8): warning C4101: 'buf' : variable locale non référencée
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(252,64): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(255,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(258,65): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(261,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(289,64): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(292,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(295,65): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(298,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(285,8): warning C4101: 'buf' : variable locale non référencée
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(373,64): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(376,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(379,65): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(382,32): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\ArduinoCom\Controller.cpp(363,8): warning C4101: 'buf' : variable locale non référencée
   Génération de code en cours
-  3 of 693 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+  9 of 126 functions ( 7.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Fin de la génération du code
   ArduinoCom.vcxproj -> D:\Créations persos\Progra\Visual Studio Projects\CommandGrid\x64\Release\ArduinoCom.exe

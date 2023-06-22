@@ -60,6 +60,8 @@ public:
 	void switch_mode(Mode mode);
 	void led_green();
 	void led_red();
+	void open_program_1();
+	void open_program_2();
 
 	Controller(size_t width, size_t height, char* com_port_grid, char* com_port_command, DWORD COM_BAUD_RATE);
 	void run(); //not to be included in my typical "while (engine.is_running()) run()"

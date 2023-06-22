@@ -167,7 +167,7 @@ GridReader::~GridReader()
 
 bool GridReader::obstructed(size_t idx)
 {
-	return sensors_val.at(idx) > (1.2 + tolerance) * mean_sensor_vals.at(idx);
+	return sensors_val.at(idx) > (1 + tolerance) * mean_sensor_vals.at(idx);
 }
 
 void GridReader::calibrate(size_t n_iter)

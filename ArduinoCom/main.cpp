@@ -6,13 +6,19 @@ char com_port_ctr[] = "\\\\.\\COM5";
 
 int main()
 {
-	Controller ctr(2, 2, com_port_sens, com_port_ctr, CBR_115200);
-	std::cout << "Awake\n";
-
+	Controller ctr(5, 5, com_port_sens, com_port_ctr, CBR_115200);
+	ctr.open_program_2();
 	while (true)
 	{
-		ctr.run();
+		std::cout << "YEP\n";
+		Sleep(500);
 	}
+	//std::cout << "Awake\n";
+
+	//while (true)
+	//{
+	//	ctr.run();
+	//}
 
 
 	

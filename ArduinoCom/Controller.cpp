@@ -173,6 +173,74 @@ void Controller::led_red()
 	p_commandReader->send_cmd_str(CMD_RED_LED);
 }
 
+void Controller::open_program_1()
+{
+	LPCSTR program_1 = "d://Jeux//Minecraft//MinecraftLauncher.exe";
+
+	STARTUPINFOA si;
+	PROCESS_INFORMATION pi;
+
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	ZeroMemory(&pi, sizeof(pi));
+
+	CreateProcessA(
+		program_1,
+		NULL,
+		NULL,
+		NULL,
+		FALSE,
+		CREATE_NEW_CONSOLE,
+		NULL,
+		NULL,
+		&si,
+		&pi
+	);
+
+	CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);
+}
+
+void Controller::open_program_2()
+{
+	LPCSTR program_2 = "c://Program Files (x86)//Mozilla Firefox//firefox.exe";
+	std::string cmd_line_str = "-new-tab https://www.youtube.com";
+	char* cmd = (char*)malloc((cmd_line_str.size() + 1) * sizeof(char));
+
+	int i = 0;
+	while (i < cmd_line_str.size())
+	{
+		cmd[i] = cmd_line_str.at(i);
+		i++;
+	}
+	cmd[i] = '\0';
+
+	LPSTR command_line = cmd;
+	std::cout << cmd << std::endl;
+	STARTUPINFOA si;
+	PROCESS_INFORMATION pi;
+
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	ZeroMemory(&pi, sizeof(pi));
+
+	CreateProcessA(
+		program_2,
+		command_line,
+		NULL,
+		NULL,
+		FALSE,
+		CREATE_NEW_CONSOLE,
+		NULL,
+		NULL,
+		&si,
+		&pi
+	);
+
+	CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);
+}
+
 Pattern* Controller::stupid_interpolation(std::vector<TimePoint>& x, std::vector<TimePoint>& y)
 {
 	//if (x.size() <= 1 && y.size() <= 1)
@@ -376,23 +444,19 @@ Pattern* Controller::process_new_pattern()
 
 Controller::Controller(size_t width, size_t height, char* com_port_grid, char* com_port_command, DWORD COM_BAUD_RATE)
 {
-	p_sensorsController = new GridReader(width, height, com_port_grid, COM_BAUD_RATE);
-	p_commandReader = new CommandReader(com_port_command, COM_BAUD_RATE);
-	currentlyReadingPattern = false;
-	timeBeforeReset = 1.f;
-	difference_sensibility = 0.05f;
-	number_of_neighbours_computed = 5;
+	//p_sensorsController = new GridReader(width, height, com_port_grid, COM_BAUD_RATE);
+	//p_commandReader = new CommandReader(com_port_command, COM_BAUD_RATE);
+	//currentlyReadingPattern = false;
+	//timeBeforeReset = 1.f;
+	//difference_sensibility = 0.05f;
+	//number_of_neighbours_computed = 5;
 
-	commands.push_back(&Controller::led_green);
-	commands.push_back(&Controller::led_red);
+	//commands.push_back(&Controller::led_green);
+	//commands.push_back(&Controller::led_red);
 
-	//for (int i = 0; i < p_sensorsController->mean_sensor_vals.size(); i++)
-	//{
-	//	p_sensorsController->mean_sensor_vals.at(i) = 10;
-	//}
-	calibrate(30);
-	patternResetTimer.restart();
-	patternTimer.restart();
+	//calibrate(30);
+	//patternResetTimer.restart();
+	//patternTimer.restart();
 }
 
 void Controller::run()
@@ -445,7 +509,7 @@ void Controller::run()
 		
 		PurgeComm(p_sensorsController->io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
 		PurgeComm(p_commandReader->io_handler_, PURGE_RXCLEAR | PURGE_TXCLEAR);
-		Sleep(5);
+		Sleep(3);
 		if (!p_sensorsController->readSensorData(1))
 			std::cout << "Couldn't read sensor data\n";
 
